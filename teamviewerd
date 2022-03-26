@@ -1,0 +1,29 @@
+#!/bin/bash
+
+status=$(teamviewer daemon status | grep 'Active:' | awk '{print $2}')
+
+if [ $status == inactive ]
+    then
+    notify-send -t 4000 -i /opt/teamviewer/tv_bin/desktop/teamviewer_256.png 'Teamviewer' 'Starting teamviewerd service'
+    teamviewer daemon start
+    status1=$(teamviewer daemon status | grep 'Active:' | awk '{print $2}')
+    if [ $status1 == active ]
+        then
+        notify-send -t 4000 -i /opt/teamviewer/tv_bin/desktop/teamviewer_256.png 'Teamviewer' 'Teamviewerd service is running...'
+        else
+        notify-send -t 4000 -i /opt/teamviewer/tv_bin/desktop/teamviewer_256.png 'Teamviewer' 'Teamviewerd service failed to start'
+    fi
+fi
+
+if [ $status == active ]
+    then
+    notify-send -t 4000 -i /opt/teamviewer/tv_bin/desktop/teamviewer_256.png 'Teamviewer' 'Stopping teamviewerd service'
+    teamviewer daemon stop
+    status2=$(teamviewer daemon status | grep 'Active:' | awk '{print $2}')
+    if [ $status2 == inactive ]
+        then
+        notify-send -t 4000 -i /opt/teamviewer/tv_bin/desktop/teamviewer_256.png 'Teamviewer' 'Teamviewerd service stopped'
+        else
+        notify-send -t 4000 -i /opt/teamviewer/tv_bin/desktop/teamviewer_256.png 'Teamviewer' 'Teamviewerd service failed to stop'
+    fi
+fi
