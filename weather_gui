@@ -1,0 +1,6 @@
+#!/usr/bin/bash
+
+a=$(zenity --entry --title "City Name" --text "Please enter the name of the city (blank for Larissa)" --width=300 --height=200)
+city=$a
+if [ -z "$a" ]; then city=$"Larissa"; fi
+xterm -xrm 'xterm*iconHint: /home/orestisfra/Templates/weather/weather.xpm' -title "Weather $city" -fn -misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1 -geometry 125x42 -hold -e curl wttr.in/$city
