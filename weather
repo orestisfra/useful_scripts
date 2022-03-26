@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+
+if [ "$1" == "-h" ]; then
+	echo "usage: weather [CITY NAME]
+
+leave [CITY NAME] blank for default"; exit 1
+fi
+city=$1
+if [ -z "$1" ]; then city=$"Larissa"; fi
+xterm -xrm 'xterm*iconHint: /home/orestisfra/Templates/weather/weather.xpm' -title "Weather $city" -fn -misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1 -geometry 125x42 -hold -e curl wttr.in/$city
