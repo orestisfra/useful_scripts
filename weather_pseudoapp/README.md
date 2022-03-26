@@ -1,3 +1,3 @@
 **DEPENDENCES**
 
-xterm
+- xterm
